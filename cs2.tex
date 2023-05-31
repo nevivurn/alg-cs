@@ -1,0 +1,83 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=0.5in,footskip=12pt]{geometry}
+\usepackage[small,compact]{titlesec}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{parskip}
+
+\setlist{noitemsep}
+
+\newcommand{\TheAuthor}{}
+\newcommand{\Author}[1]{\renewcommand{\TheAuthor}{#1}\author{#1}}
+
+\newcommand{\TheTitle}{}
+\newcommand{\Title}[1]{\renewcommand{\TheTitle}{#1}\title{#1}}
+
+\Title{Algorithms Final Cheatsheet}
+\Author{Yongun Seong}
+
+\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot[L]{\TheAuthor}
+\fancyfoot[C]{\TheTitle}
+\fancyfoot[R]{2017-19937}
+\renewcommand{\headrulewidth}{0pt}
+
+\begin{document}
+
+\section{Dynamic Programming}
+
+\begin{itemize}
+	\item \textbf{Optimal substructure}: Optimal subproblems.
+	\item \textbf{Overlapping subproblems}: Recursion is repetitive.
+	\item $\mathbf{tD / eD}$: space $\mathcal{O}(n^t)$, time $\mathcal{O}(n^{t+e})$
+\end{itemize}
+
+\section{Graph}
+
+\begin{itemize}
+	\item \textbf{Topo sort}: Prune leaves or DFS on return $\mathcal{O}(|V|+|E|)$
+	\item \textbf{Dijkstra}: Non-neg, min heap $\mathcal{O}(|E|\log{|V|})$
+	\item \textbf{Bellman-Ford}: Relax $|V-1|$ times, loop if we can relax more $\Theta(\left|E\right|\left|V\right|)$
+	\item \textbf{DAG shortest}: Topo sort, take path $\Theta|V|+|E|$
+	\item \textbf{Floyd-Warshall}: All pairs. $d^k_{ij} = min(d^{k-1}_{ij}, d^{k-1}_{ik} + d^{k-1}_{kj})$, time $\mathcal{O}(n^3)$, space $\mathcal{O}(n^2)$ (reuse k)
+	\item \textbf{SCC}: Visit order DFS, transpose, traversal tree is SCC $\Theta(|V|+|E|)$
+\end{itemize}
+
+\section{String Matching}
+
+\begin{itemize}
+	\item \textbf{Na\"ive}: Try all starting positions $\mathcal{O}(mn)$
+	\item \textbf{Automata}: $\Theta(n+|\Sigma|m)$
+	\item \textbf{Constructing automata}: Find last restart location $\mathcal{O}(m^3|\Sigma|) \rightarrow \mathcal{O}(m|\Sigma|)$
+	\item \textbf{Rabin-Karp}: String to int as window hash $\Theta(n)$
+\end{itemize}
+
+\section{NP}
+
+\begin{itemize}
+	\item Tractable = Polynomial
+	\item \textbf{Polynomial-time reduction}: $A \le_P B$
+	\item \textbf{P}: Solvable in poly time
+	\item \textbf{NP}: Solvable by nondeterministic TM in poly time, verifiable in poly time
+	\item \textbf{NP-hard}: $\forall{A \in \textrm{NP}}, A \le_P L$
+	\item \textbf{NP-complete}: NP and NP-hard
+	\item \textbf{Theorem 1}: $\exists{A \in \textrm{NP-hard}}, A \le_P L$
+	\item \textbf{Hamiltonian}: Cycle visiting exactly once
+	\item $\textrm{hamiltonian} \le_P \textrm{longest path}$
+	\item $\textrm{3SAT} \le_P \textrm{CLIQUE}$
+\end{itemize}
+
+\section{State-Space-Tree}
+
+\begin{itemize}
+	\item \textbf{Live node}: Generated, but not all children generated
+	\item \textbf{Backtracking}: DFS, new node is live, may have pruning
+	\item \textbf{Branch-and-bound}: All children are generated before new live
+	\item \textbf{A*}: Dijkstra with estimate
+\end{itemize}
+
+\end{document}
